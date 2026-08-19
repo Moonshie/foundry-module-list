@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundry Module Catalogue</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- Alpine.js via CDN — no build step, no npm install -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body x-data="catalogue()" x-init="init()">
+
+  <header>
+    <div class="header-top">
+      <h1>Foundry Module Catalogue</h1>
+      <nav class="system-switch" x-show="systems.length">
+        <template x-for="sys in systems" :key="sys.id">
+          <button
+            class="system-button"
+            :class="{ active: activeSystem === sys.id }"
+            @click="selectSystem(sys.id)"
+            x-text="sys.label">
+          </button>
+        </template>
+      </nav>
+    </div>
+    <div class="version-row" x-show="versionsForActiveSystem.length">
+      <label class="version-label">
+        Version:
+        <select
+          class="version-select"
+          :value="activeVersionFile"
+          @change="selectVersion($event.target.value)">
+          <template x-for="v in versionsForActiveSystem" :key="v.file">
+            <option :value="v.file" x-text="'v' + v.version + ' (' + v.foundryVersion + ', ' + v.date + ')'"></option>
+          </template>
+        </select>
+      </label>
+    </div>
+    <p class="subtitle">Modules I use, how I tag them, and what I've changed under the hood.</p>
+  </header>
+
+  <div class="load-error" x-show="loadError" x-text="loadError"></div>
+
+  <!-- Core & System settings: always visible above modules, visually distinct, no tags/description -->
+  <section class="settings-blocks">
+    <div class="settings-block core-block" x-data="{ open: false }">
+      <button class="settings-block-header" @click="open = !open">
+        <span>Core Settings</span>
+        <span class="toggle-icon" x-text="open ? '\u2212' : '+'"></span>
+      </button>
+      <div class="settings-block-body" x-show="open">
+        <template x-if="coreSettings.length === 0">
+          <p class="empty-note">No custom settings yet.</p>
+        </template>
+        <template x-for="s in coreSettings" :key="s.path.join('>')">
+          <div class="setting">
+            <p class="path" x-text="s.path.join(' \u203a ')"></p>
+            <p class="change">
+              <span class="from" x-text="s.from"></span>
+              <span class="arrow">&rarr;</span>
+              <span class="to" x-text="s.to"></span>
+            </p>
+            <p class="reasoning" x-show="s.reasoning" x-text="s.reasoning"></p>
+          </div>
+        </template>
+      </div>
+    </div>
+
+    <div class="settings-block system-block" x-data="{ open: false }">
+      <button class="settings-block-header" @click="open = !open">
+        <span x-text="activeSystemLabel + ' Settings'"></span>
+        <span class="toggle-icon" x-text="open ? '\u2212' : '+'"></span>
+      </button>
+      <div class="settings-block-body" x-show="open">
+        <template x-if="systemSettings.length === 0">
+          <p class="empty-note">No custom settings yet.</p>
+        </template>
+        <template x-for="s in systemSettings" :key="s.path.join('>')">
+          <div class="setting">
+            <p class="path" x-text="s.path.join(' \u203a ')"></p>
+            <p class="change">
+              <span class="from" x-text="s.from"></span>
+              <span class="arrow">&rarr;</span>
+              <span class="to" x-text="s.to"></span>
+            </p>
+            <p class="reasoning" x-show="s.reasoning" x-text="s.reasoning"></p>
+          </div>
+        </template>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category selector: "All" or narrow to one category -->
+  <section class="category-select" x-show="categoriesForSystem.length">
+    <span class="filters-label">Category:</span>
+    <button
+      class="category-button"
+      :class="{ active: activeCategory === 'all' }"
+      @click="activeCategory = 'all'">
+      All
+    </button>
+    <template x-for="cat in categoriesForSystem" :key="cat">
+      <button
+        class="category-button"
+        :class="{ active: activeCategory === cat }"
+        @click="activeCategory = cat"
+        x-text="cat">
+      </button>
+    </template>
+  </section>
+
+  <section class="filters" x-show="allTags.length">
+    <span class="filters-label">Filter by tag:</span>
+    <template x-for="tag in allTags" :key="tag">
+      <button
+        class="tag-button"
+        :class="{ active: activeTags.includes(tag) }"
+        :style="activeTags.includes(tag) ? { background: tagColor(tag), borderColor: tagColor(tag) } : {}"
+        @click="toggleTag(tag)"
+        x-text="tag">
+      </button>
+    </template>
+    <button class="tag-button clear" x-show="activeTags.length" @click="activeTags = []">Clear</button>
+  </section>
+
+  <!-- Modules grouped by category (in categoryOrder), alphabetical within each group -->
+  <section class="modules">
+    <template x-for="group in groupedModules" :key="group.category">
+      <div class="module-group">
+        <h2 class="group-title" x-text="group.category"></h2>
+
+        <template x-for="mod in group.modules" :key="mod.id">
+          <article class="module-slab" x-data="{ open: false }">
+            <div
+              class="slab-header"
+              :class="{ clickable: modSettings(mod).length }"
+              @click="if (modSettings(mod).length) open = !open">
+
+              <div class="slab-left">
+                <span
+                  class="expand-arrow"
+                  :class="{ open: open, hidden: !modSettings(mod).length }">
+                  &#9656;
+                </span>
+                <span class="mod-name" x-text="mod.name"></span>
+              </div>
+
+              <div class="slab-right">
+                <a
+                  x-show="mod.url"
+                  :href="mod.url"
+                  target="_blank"
+                  rel="noopener"
+                  class="mod-link"
+                  @click.stop>
+                  Link <span class="link-icon">&#8599;</span>
+                </a>
+                <div class="mod-tags" x-show="mod.tags.length">
+                  <template x-for="tag in mod.tags" :key="tag">
+                    <span class="tag" :style="{ background: tagColor(tag) }" x-text="tag"></span>
+                  </template>
+                </div>
+              </div>
+            </div>
+
+            <p class="mod-note" x-show="mod.note" x-text="mod.note"></p>
+
+            <template x-if="modSettings(mod).length">
+              <div class="mod-settings" x-show="open">
+                <template x-for="s in modSettings(mod)" :key="s.path.join('>')">
+                  <div class="setting">
+                    <p class="path" x-text="s.path.join(' \u203a ')"></p>
+                    <p class="change">
+                      <span class="from" x-text="s.from"></span>
+                      <span class="arrow">&rarr;</span>
+                      <span class="to" x-text="s.to"></span>
+                    </p>
+                    <p class="reasoning" x-show="s.reasoning" x-text="s.reasoning"></p>
+                  </div>
+                </template>
+              </div>
+            </template>
+          </article>
+        </template>
+      </div>
+    </template>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>

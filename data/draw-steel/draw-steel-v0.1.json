@@ -1,0 +1,52 @@
+{
+  "categoryOrder": ["Must Have", "Core Recommended"],
+
+  "tagColors": {
+    "Backend": "#888888",
+    "Audio-visual": "#888888",
+    "UI and QoL": "#888888"
+  },
+
+  "coreSettings": [],
+
+  "systemSettings": [],
+
+  "modules": [
+    {
+      "id": "big-bad-module-manager",
+      "name": "Big Bad Module Manager",
+      "url": "",
+      "category": "Must Have",
+      "tags": ["Backend"],
+      "note": "If you have a big stack",
+      "settings": []
+    },
+    {
+      "id": "dice-so-nice",
+      "name": "Dice So Nice!",
+      "url": "",
+      "category": "Must Have",
+      "tags": ["Audio-visual"],
+      "note": "Technically not necessary, but realistically vital",
+      "settings": []
+    },
+    {
+      "id": "quick-insert",
+      "name": "Quick Insert - Search Widget",
+      "url": "",
+      "category": "Must Have",
+      "tags": ["UI and QoL"],
+      "note": "Saves so much time it's insane, THE single best module on Foundry",
+      "settings": []
+    },
+    {
+      "id": "bar-brawl",
+      "name": "Bar Brawl",
+      "url": "",
+      "category": "Core Recommended",
+      "tags": ["Audio-visual"],
+      "note": "",
+      "settings": []
+    }
+  ]
+}

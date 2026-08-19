@@ -1,0 +1,363 @@
+/* ---- Theme tokens: light by default, dark via prefers-color-scheme ---- */
+:root {
+  --bg: #f7f7f8;
+  --text: #1a1a1a;
+  --muted: #666666;
+  --card-bg: #ffffff;
+  --card-border: #e2e2e5;
+  --accent: #1a1a1a;
+  --accent-contrast: #ffffff;
+  --settings-bg: #f0f0f2;
+  --from-color: #b3261e;
+  --to-color: #2a7a2a;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16171b;
+    --text: #e9e9ec;
+    --muted: #9a9aa4;
+    --card-bg: #1f2025;
+    --card-border: #2c2d33;
+    --accent: #e9e9ec;
+    --accent-contrast: #16171b;
+    --settings-bg: #26272d;
+    --from-color: #e08a84;
+    --to-color: #86d19a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem;
+  line-height: 1.5;
+  background: var(--bg);
+  color: var(--text);
+}
+
+.load-error {
+  background: var(--from-color);
+  color: #fff;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+/* ---- Header ---- */
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+header h1 {
+  margin: 0 0 0.25rem;
+  font-size: 1.6rem;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 0;
+}
+
+.system-switch {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.system-button {
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.system-button.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+.version-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 0.4rem;
+}
+
+.version-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.version-select {
+  background: var(--card-bg);
+  color: var(--text);
+  border: 1px solid var(--card-border);
+  border-radius: 6px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+}
+
+/* ---- Core / System settings blocks ---- */
+.settings-blocks {
+  display: grid;
+  gap: 0.75rem;
+  margin: 1.75rem 0;
+}
+
+.settings-block {
+  border: 1px dashed var(--card-border);
+  border-radius: 8px;
+  background: var(--settings-bg);
+}
+
+.settings-block-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.toggle-icon {
+  color: var(--muted);
+}
+
+.settings-block-body {
+  padding: 0 1rem 1rem;
+}
+
+.empty-note {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/* ---- Category selector ---- */
+.category-select {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.category-button {
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.82rem;
+  cursor: pointer;
+}
+
+.category-button.active {
+  background: var(--accent);
+  color: var(--accent-contrast);
+  border-color: var(--accent);
+}
+
+/* ---- Tag filter bar ---- */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1.5rem 0;
+}
+
+.filters-label {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-right: 0.25rem;
+}
+
+.tag-button {
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.tag-button.active {
+  color: #fff;
+}
+
+.tag-button.clear {
+  border: none;
+  background: none;
+  text-decoration: underline;
+  color: var(--muted);
+}
+
+/* ---- Module groups ---- */
+.module-group {
+  margin-top: 2rem;
+}
+
+.group-title {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  border-bottom: 1px solid var(--card-border);
+  padding-bottom: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+/* ---- Module slab (horizontal card) ---- */
+.module-slab {
+  border: 1px solid var(--card-border);
+  background: var(--card-bg);
+  border-radius: 8px;
+  padding: 0.9rem 1.1rem;
+  margin-bottom: 0.75rem;
+}
+
+.slab-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.slab-header.clickable {
+  cursor: pointer;
+}
+
+.slab-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.expand-arrow {
+  display: inline-block;
+  font-size: 0.75rem;
+  color: var(--muted);
+  transition: transform 0.15s ease;
+  width: 0.8em;
+  flex-shrink: 0;
+}
+
+.expand-arrow.open {
+  transform: rotate(90deg);
+}
+
+.expand-arrow.hidden {
+  visibility: hidden;
+}
+
+.mod-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.slab-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.mod-link {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.mod-link:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
+.link-icon {
+  font-size: 0.75rem;
+}
+
+.mod-tags {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.7rem;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.12rem 0.55rem;
+}
+
+.mod-note {
+  margin: 0.4rem 0 0 1.3em;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* ---- Expandable config changes ---- */
+.mod-settings {
+  margin: 0.6rem 0 0 1.3em;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.setting {
+  font-size: 0.88rem;
+  margin-bottom: 0.6rem;
+}
+
+.setting .path {
+  color: var(--text);
+  margin: 0 0 0.15rem;
+  opacity: 0.85;
+}
+
+.setting .change {
+  margin: 0;
+}
+
+.setting .from {
+  color: var(--from-color);
+}
+
+.setting .to {
+  color: var(--to-color);
+}
+
+.setting .reasoning {
+  color: var(--muted);
+  font-size: 0.82rem;
+  margin: 0.2rem 0 0;
+}

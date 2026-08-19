@@ -1,0 +1,122 @@
+{
+  "categoryOrder": ["Must Have", "Core Recommended"],
+
+  "tagColors": {
+    "Backend": "#888888",
+    "Audio-visual": "#888888",
+    "UI and QoL": "#888888"
+  },
+
+  "coreSettings": [
+    {
+      "path": ["User Interface", "Interface Fading", "Fade Speed (ms)"],
+      "from": "500",
+      "to": "100",
+      "reasoning": ""
+    },
+    {
+      "path": ["Combat Tracker", "Actors Dead at 0 HP"],
+      "from": "Yes",
+      "to": "No",
+      "reasoning": ""
+    },
+    {
+      "path": ["Combat Tracker", "Scrolling Status Text"],
+      "from": "true",
+      "to": "false",
+      "reasoning": ""
+    }
+  ],
+
+  "systemSettings": [
+    {
+      "path": ["Manage Automation", "Encumbrance"],
+      "from": "false",
+      "to": "true",
+      "reasoning": ""
+    },
+    {
+      "path": ["Manage Automation", "Reach Enforcement"],
+      "from": "[Doors]",
+      "to": "[Doors, Loot]",
+      "reasoning": ""
+    },
+    {
+      "path": ["Limit Metagame Information", "Shared Party Vision"],
+      "from": "false",
+      "to": "true",
+      "reasoning": ""
+    }
+  ],
+
+  "modules": [
+    {
+      "id": "big-bad-module-manager",
+      "name": "Big Bad Module Manager",
+      "url": "",
+      "category": "Must Have",
+      "tags": ["Backend"],
+      "note": "If you have a big stack",
+      "settings": [
+        {
+          "path": ["Default grouping"],
+          "from": "None",
+          "to": "By Tag",
+          "reasoning": ""
+        },
+        {
+          "path": ["Prompt to enable newly installed modules"],
+          "from": "true",
+          "to": "false",
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "dice-so-nice",
+      "name": "Dice So Nice!",
+      "url": "",
+      "category": "Must Have",
+      "tags": ["Audio-visual"],
+      "note": "Technically not necessary, but realistically vital",
+      "settings": [
+        {
+          "path": ["Global Animation speed"],
+          "from": "Player's Choice",
+          "to": "2x",
+          "reasoning": ""
+        },
+        {
+          "path": ["Disable 3D dice on NPC rolls"],
+          "from": "false",
+          "to": "true",
+          "reasoning": ""
+        },
+        {
+          "path": ["Show Ghost dice for hidden rolls"],
+          "from": "Disable Ghost Dice",
+          "to": "For player rolls only (hide GM rolls)",
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "quick-insert",
+      "name": "Quick Insert - Search Widget",
+      "url": "",
+      "category": "Must Have",
+      "tags": ["UI and QoL", "Backend"],
+      "note": "Saves so much time it's insane, THE single best module on Foundry",
+      "settings": []
+    },
+    {
+      "id": "bar-brawl",
+      "name": "Bar Brawl",
+      "url": "",
+      "category": "Core Recommended",
+      "tags": ["Audio-visual"],
+      "note": "",
+      "settings": []
+    }
+  ]
+}
