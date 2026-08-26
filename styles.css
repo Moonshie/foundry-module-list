@@ -314,8 +314,8 @@ header h1 {
 }
 
 .tag {
-  font-size: 0.7rem;
-  color: #fff;
+  font-size: 0.8rem;
+  color: #00000099;
   border-radius: 4px;
   padding: 0.12rem 0.55rem;
 }

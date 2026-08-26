@@ -2,9 +2,13 @@
   "categoryOrder": ["Must Have", "Core Recommended"],
 
   "tagColors": {
-    "Backend": "#888888",
-    "Audio-visual": "#888888",
-    "UI and QoL": "#888888"
+    "Backend": "#ffe599",
+    "Cosmetic": "#b6d7a8",
+    "UI and QoL": "#a4c2f4",
+    "Automation": "#ea9999",
+    "Dependency": "#cccccc",
+    "Paid": "#b4a7d6",
+    "Adventure": "#f9cb9c"
   },
 
   "coreSettings": [
@@ -12,7 +16,13 @@
       "path": ["User Interface", "Interface Fading", "Fade Speed (ms)"],
       "from": "500",
       "to": "100",
-      "reasoning": ""
+      "reasoning": "Personal preference, I think 500ms is way too long for fading elements."
+    },
+    {
+      "path": ["Prototype Token Overrides"],
+      "from": "Default",
+      "to": "Custom",
+      "reasoning": "There's a lot of personal preference here. For example, I prefer NPCs to also have Vision Enabled on, since it lets me parse what a specific enemy is able to see at any given moment. Importantly I'd advice against having Ring Enabled On even if you're using Dynamic Rings for everything -- it will interfere with some Summons automations, like Wall of Stone."
     },
     {
       "path": ["Combat Tracker", "Actors Dead at 0 HP"],
@@ -21,10 +31,10 @@
       "reasoning": ""
     },
     {
-      "path": ["Combat Tracker", "Scrolling Status Text"],
+      "path": ["Scrolling Status Text"],
       "from": "true",
       "to": "false",
-      "reasoning": ""
+      "reasoning": "Frankly I just think that it looks really bad. And there are other ways to display damage numbers."
     }
   ],
 
@@ -33,19 +43,25 @@
       "path": ["Manage Automation", "Encumbrance"],
       "from": "false",
       "to": "true",
-      "reasoning": ""
+      "reasoning": "Enabled since I tend to run games RAW."
     },
     {
       "path": ["Manage Automation", "Reach Enforcement"],
       "from": "[Doors]",
       "to": "[Doors, Loot]",
-      "reasoning": ""
+      "reasoning": "I don't mind playing looting corpses at a 'distance', since it's assumed they walk around during the short break. But loot actors should be directly interacted with, as there might be a trap nearby :)"
     },
     {
-      "path": ["Limit Metagame Information", "Shared Party Vision"],
+      "path": ["Configure World Clock", "Player Access"],
       "from": "false",
       "to": "true",
-      "reasoning": ""
+      "reasoning": "Makes players actually see the HUD's clock above the chat."
+    },
+    {
+      "path": ["Configure World Clock", "Synchronize Darkness"],
+      "from": "false",
+      "to": "true",
+      "reasoning": "On by default, turned off in scene configs for indoor scenes and whatnot."
     }
   ],
 
@@ -53,70 +69,1727 @@
     {
       "id": "big-bad-module-manager",
       "name": "Big Bad Module Manager",
-      "url": "",
-      "category": "Must Have",
+      "url": "https://foundryvtt.com/packages/bbmm",
+      "category": "Agnostic Essential",
       "tags": ["Backend"],
-      "note": "If you have a big stack",
+      "note": "Currently the best solution for managing modules, their settings, and syncing settings with users.",
       "settings": [
         {
           "path": ["Default grouping"],
           "from": "None",
           "to": "By Tag",
-          "reasoning": ""
+          "reasoning": "Optional, but makes it easier to organize modules."
         },
         {
           "path": ["Prompt to enable newly installed modules"],
           "from": "true",
           "to": "false",
-          "reasoning": ""
+          "reasoning": "Personally I found it annoying."
         }
       ]
     },
     {
       "id": "dice-so-nice",
       "name": "Dice So Nice!",
-      "url": "",
-      "category": "Must Have",
-      "tags": ["Audio-visual"],
-      "note": "Technically not necessary, but realistically vital",
+      "url": "https://foundryvtt.com/packages/dice-so-nice/",
+      "category": "Agnostic Recommended",
+      "tags": ["Cosmetic"],
+      "note": "The only thing stopping me from declaring Dice So Nice as Essential is the fact that it can cause some synchronicity issues and potential performance problems. Otherwise, it's the best solution to have 3d dice on the table.",
       "settings": [
         {
           "path": ["Global Animation speed"],
           "from": "Player's Choice",
           "to": "2x",
-          "reasoning": ""
+          "reasoning": "Players having different animation speeds can cause sync issues -- some players will see the result before others, and it can be jarring. This doesn't solve it (since it's still possible for players to turn off the 3D dice client-side), but it helps mitigate it. Consider 3x if the dice rolls still take too long."
         },
         {
           "path": ["Disable 3D dice on NPC rolls"],
           "from": "false",
           "to": "true",
-          "reasoning": ""
+          "reasoning": "Personal preference -- when playing the enemies' turns I prefer to keep things quick."
         },
         {
           "path": ["Show Ghost dice for hidden rolls"],
           "from": "Disable Ghost Dice",
           "to": "For player rolls only (hide GM rolls)",
-          "reasoning": ""
+          "reasoning": "Ghost dice are fun to see, but if the players see the GM make secret checks they might start metagaming unintentionally."
         }
       ]
     },
     {
       "id": "quick-insert",
       "name": "Quick Insert - Search Widget",
-      "url": "",
-      "category": "Must Have",
-      "tags": ["UI and QoL", "Backend"],
-      "note": "Saves so much time it's insane, THE single best module on Foundry",
+      "url": "https://foundryvtt.com/packages/quick-insert",
+      "category": "Agnostic Essential",
+      "tags": ["UI and QoL"],
+      "note": "I am honestly tempted to say that this is the single best module for Foundry. Lightning-fast and just so convenient, I cannot imagine using Foundry without it. Has a bunch of customization settings, though I am more than happy with the defaults.",
       "settings": []
     },
     {
       "id": "bar-brawl",
       "name": "Bar Brawl",
+      "url": "https://foundryvtt.com/packages/barbrawl",
+      "category": "Agnostic Recommended",
+      "tags": ["Cosmetic"],
+      "note": "Out of the box it's already better than Foundry's own resource bars, offering more customisation. With some setup you can make tons of cool effects andn use custom images for bars.",
+      "settings": [
+        {
+          "path": ["Token Settings"],
+          "from": ["Default"],
+          "to": ["Custom"],
+          "reasoning": "There are a lot of settings you could be changing, so I'm not providing specifics. Personally I like to show the NPCs percentage health and the player characters actual numbers, and I use custom pixel-art health bars in place of the generic Foundry gradient ones."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-secrets-of-grayce",
+      "name": "PF2e Secrets of Grayce",
+      "url": "https://foundryvtt.com/packages/pf2e-secrets-of-grayce",
+      "category": "Content",
+      "tags": ["Content - GM", "Paid"],
+      "note": "Pathfinder's newest beginner box. The intro is more or less of the same quality, maybe a bit better (less nonsensical story-wise). The follow-up adventures are way, way better than Troubles in Otari.",
+      "settings": []
+    },
+    {
+      "id": "raise-my-hand",
+      "name": "✋ Raise My Hand",
+      "url": "https://foundryvtt.com/packages/raise-my-hand",
+      "category": "Agnostic Essential",
+      "tags": ["UI and QoL"],
+      "note": "Very simple module that allows players to press H to 'raise their hand', indicating to the GM that they want to say something. The inclusion of the X-Card makes it Essential in my eyes.",
+      "settings": [
+        {
+          "path": ["Configure Hand", "Notification Modes"],
+          "from": ["Player List Icon", "Aural Notification"],
+          "to": ["Player List Icon", "Aural Notification", "UI Notification"],
+          "reasoning": "Personal preference, I find it much harder to miss with the UI notification enabled."
+        },
+        {
+          "path": ["Configure Hand", "Volume"],
+          "from": ["65"],
+          "to": ["10"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Configure X-Card", "Enable X-Card"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Configure X-Card", "Notification Sound"],
+          "from": ["Default Alarm"],
+          "to": ["Disabled"],
+          "reasoning": "Preference, but you can't miss a middle-of-the-screen popup."
+        }
+      ]
+    },
+    {
+      "id": "pause-icon",
+      "name": "Alternative Pause Icon",
+      "url": "https://foundryvtt.com/packages/pause-icon",
+      "category": "Agnostic Recommended",
+      "tags": ["UI and QoL"],
+      "note": "A bunch of ways to edit the default pause overlay.",
+      "settings": [
+        {
+          "path": ["Settings Submenu", "Image and Look", "Vertical Position"],
+          "from": ["50"],
+          "to": ["91"],
+          "reasoning": "This and everything else here is personal preference. Move it out of the way so it doesn't obstruct the view of the scene."
+        },
+        {
+          "path": ["Settings Submenu", "Image and Look", "Speed"],
+          "from": ["5"],
+          "to": ["60"],
+          "reasoning": "One rotation a minute."
+        },
+        {
+          "path": ["Settings Submenu", "Image and Look", "Pulsing Animation"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": "Less annoying."
+        },
+        {
+          "path": ["Settings Submenu", "Font and Text", "Pause message"],
+          "from": ["Game Paused"],
+          "to": [""],
+          "reasoning": "I simply remove it, the icon should be enough in my opinion."
+        }
+      ]
+    },
+    {
+      "id": "socketlib",
+      "name": "socketlib",
+      "url": "https://foundryvtt.com/packages/socketlib",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "An oft-used dependency that allows other modules to execute things as GM/player.",
+      "settings": []
+    },
+    {
+      "id": "breaktime",
+      "name": "Break Time",
+      "url": "https://foundryvtt.com/packages/breaktime",
+      "category": "Agnostic Essential",
+      "tags": ["UI and QoL"],
+      "note": "A module to 'automate' taking breaks, allowing players to mark when they're back. Also has afk/back functionality built in.",
+      "settings": [
+        {
+          "path": ["24 Hour Time"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Volume"],
+          "from": ["60"],
+          "to": ["15"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Default Time"],
+          "from": ["5"],
+          "to": ["15"],
+          "reasoning": "This will depend on how long your breaks are."
+        },
+        {
+          "path": ["Auto Break Time"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "CautiousGamemastersPack",
+      "name": "Cautious Gamemaster's Pack",
+      "url": "https://foundryvtt.com/packages/CautiousGamemastersPack",
+      "category": "Agnostic Essential",
+      "tags": ["UI and QoL"],
+      "note": "A number of useful small settings, exactly what it says on the tin.",
+      "settings": [
+        {
+          "path": ["GM Speaker mode"],
+          "from": ["Default"],
+          "to": ["Disable GM speaking as PC"],
+          "reasoning": "Incredibly mild, but allows the GM to send items/actions in chat without it being flagged is done by the character."
+        },
+        {
+          "path": ["Blind rolls made by hidden tokens"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Good failsafe in case you forget to set a sneak/perception check on an enemy to blind beforehand."
+        },
+        {
+          "path": ["Notify typing"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "lib-wrapper",
+      "name": "libWrapper",
+      "url": "https://foundryvtt.com/packages/lib-wrapper",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "A module to detect and prevent potential module conflicts.",
+      "settings": []
+    },
+    {
+      "id": "remote-highlight-ui",
+      "name": "Remote Highlight UI",
+      "url": "https://foundryvtt.com/packages/remote-highlight-ui",
+      "category": "Agnostic Essential",
+      "tags": ["UI and QoL"],
+      "note": "A quick and easy way to point out things on the screen so the players know what they need to click.",
+      "settings": []
+    },
+    {
+      "id": "z-scatter",
+      "name": "Z Scatter",
+      "url": "https://foundryvtt.com/packages/z-scatter",
+      "category": "Agnostic Essential",
+      "tags": ["UI and QoL"],
+      "note": "Slightly displaces tokens if two of the same size are in one square. Massively helps whenever verticality is involved.",
+      "settings": [
+        {
+          "path": ["Ignore Token Elevation"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "One of the main uses cases for me is when one token is directly above another, so this is essential."
+        },
+        {
+          "path": ["Collide Different Token Sizes"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": "It's already possible to see tokens of different sizes over each other, so this is not necessary."
+        },
+        {
+          "path": ["Scattering"],
+          "from": ["0.3"],
+          "to": ["0.15"],
+          "reasoning": "Preference. I find it that 0.15 dislodges the tokens enough to be easily selectable, but still clearly indicates which square they're in."
+        }
+      ]
+    },
+    {
+      "id": "find-the-culprit",
+      "name": "Find the Culprit!",
+      "url": "https://foundryvtt.com/packages/find-the-culprit/",
+      "category": "Agnostic Recommended",
+      "tags": ["Backend"],
+      "note": "A utility to test your module setup if something goes wrong. I can't say it always works out, but it can still be very helpful.",
+      "settings": []
+    },
+    {
+      "id": "ear",
+      "name": "Enhanced Audio Resources [Testing]",
+      "url": "https://foundryvtt.com/packages/ear",
+      "category": "Agnostic Recommended",
+      "tags": ["UI and QoL"],
+      "note": "This module is new to me, but it does make the playlist controls much better. While it's clearly vibe-coded, it seems quite functional so far in my testing.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-flip-token",
+      "name": "PF2e Flip Token / Foundry Flip Token",
+      "url": "https://foundryvtt.com/packages/pf2e-flip-token",
+      "category": "System Useful",
+      "tags": ["Cosmetic", "UI and QoL"],
+      "note": "This is analogues to the premium Token Flip module, with fewer options but similar results. It's a little janky, but if you need a way to constantly swap between two token images, this is easier than playing with rule elements.",
+      "settings": []
+    },
+    {
+      "id": "sequencer",
+      "name": "Sequencer",
+      "url": "https://foundryvtt.com/packages/sequencer",
+      "category": "Agnostic Essential",
+      "tags": ["Cosmetic", "Dependency"],
+      "note": "This is what's powering pretty much every single animation module on Foundry. Besides being required for all those other modules, it's a powerful tool in its own right if you want to wrap your hand around it.",
+      "settings": []
+    },
+    {
+      "id": "bossbar",
+      "name": "Boss Bar",
+      "url": "https://foundryvtt.com/packages/bossbar",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic"],
+      "note": "Big full-screen health bar for the boss enemies, with a satisfying hit animation. Has a way to make your own designs as well!",
+      "settings": []
+    },
+    {
+      "id": "custom-css",
+      "name": "Custom CSS",
+      "url": "https://foundryvtt.com/packages/custom-css",
+      "category": "Agnostic Useful",
+      "tags": ["Backend"],
+      "note": "If you are at a midpoint where you understand CSS and want to do some tweaks to Foundry's visuals, but do not want to build your own module, Custom CSS will do the job. I personally used it to re-style the journals for one of my campaigns, and it worked well enough.",
+      "settings": []
+    },
+    {
+      "id": "eskie-effects-free",
+      "name": "Eskie Effects Free",
+      "url": "https://foundryvtt.com/packages/eskie-effects-free",
+      "category": "Agnostic Recommended",
+      "tags": ["Cosmetic"],
+      "note": "Highly recommend this pack, lots of beautiful effects. They are on a more abstract side than, say, JB2A, somewhat reminiscent of JRPGs in my mind. And I, frankly, much prefer that. Highly recommend the premium as well.",
+      "settings": []
+    },
+    {
+      "id": "eskie-effects",
+      "name": "Eskie Effects",
+      "url": "https://www.patreon.com/EskieEffects",
+      "category": "Agnostic Recommended",
+      "tags": ["Cosmetic", "Paid"],
+      "note": "Full package of the great effects. Highly recommended.",
+      "settings": []
+    },
+    {
+      "id": "eskie-macros",
+      "name": "Eskie Macro Pack",
+      "url": "https://foundryvtt.com/packages/eskie-macros",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic", "UI and QoL"],
+      "note": "Premade macros that play specific animations. Most of them rely on the full version, not the free one, and will fail if you don't have it. They also rely on some additional dependencies. If you choose to use this pack, you can integrate the macros into whatever pipeline you're using, I wouldn't recommend activating them 'by hand'. It's also a great source to pick up how to hand-write Sequences if you want to make your own specific animations that go beyond Trigger Animations' reach.",
+      "settings": []
+    },
+    {
+      "id": "foundry-summons",
+      "name": "Foundry Summons",
+      "url": "https://foundryvtt.com/packages/foundry-summons",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "A module to create a controlled copy of any actor in the compendia. Technically it's functional right out of the box, but unrestricted. PF2e Summons Helper is what uses it for specific spells and effects.",
+      "settings": [
+        {
+          "path": ["Minimum Permissions"],
+          "from": ["Trusted Player"],
+          "to": ["Player"],
+          "reasoning": "Unless your players are actively trying to sabotage the game, there shouldn't be an issue with them using Foundry Summons."
+        },
+        {
+          "path": ["NPC Previews"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Allows the users to check out the statblock of whatever they're about to summon. This can lead to metagaming, but once again, it's a player issue, not a module issue."
+        }
+      ]
+    },
+    {
+      "id": "tcal",
+      "name": "Transient Compendium Actor Library",
+      "url": "https://foundryvtt.com/packages/tcal",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "A way for all the summoning tools to have real actors without flooding the actors tab.",
+      "settings": []
+    },
+    {
+      "id": "fxmaster",
+      "name": "Gambit's FXMaster",
+      "url": "https://foundryvtt.com/packages/fxmaster/",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic"],
+      "note": "At the minimum this can be used for some cool weather particle effects. More available in the premium version. The ceiling is quite high if you want to tinker with the custom settings.",
+      "settings": []
+    },
+    {
+      "id": "fxmaster-plus",
+      "name": "Gambit's FXMaster+",
+      "url": "https://foundryvtt.com/packages/fxmaster-plus",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic", "Paid"],
+      "note": "More effects than the free version.",
+      "settings": []
+    },
+    {
+      "id": "JB2A_DnD5e",
+      "name": "JB2A - Jules&Ben's Animated Assets",
+      "url": "https://foundryvtt.com/packages/JB2A_DnD5e",
+      "category": "Dependency",
+      "tags": ["Dependency", "Cosmetic"],
+      "note": "So many things straight up require this that I might as well classify it as a dependency. Most modules won't ask you for the premium version, free is enough.",
+      "settings": []
+    },
+    {
+      "id": "jb2a_patreon",
+      "name": "JB2A - Patreon Complete Collection",
+      "url": "https://www.patreon.com/JB2A",
+      "category": "Agnostic Recommended",
+      "tags": ["Cosmetic", "Paid"],
+      "note": "This isn't really required, like the free version is, but it offers a ton of options and variants. I'd very much recommend subscribing, if even once, to get a pack and use it if you want more home-made animations. Premade animation packs usually do not rely on premium assets, unsurprisingly.",
+      "settings": []
+    },
+    {
+      "id": "blfx-assets-pack01",
+      "name": "BLFX Assets | Pack-01",
+      "url": "https://www.patreon.com/cw/BossLoot",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic", "Paid"],
+      "note": "Personally, I don't use the animation editor itself. It's just not good enough for my PF2e needs, so far as there's no option to change the auto-recognition. But the assets are a decent bit of extra stuff if you feel like JB2A and Eskie are not covering everything you want to animate.",
+      "settings": []
+    },
+    {
+      "id": "genga",
+      "name": "Genga: System Agnostic Anime Animations",
+      "url": "https://foundryvtt.com/packages/genga",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "The animations themselves are not for me, as they are way too meta, but it serves as a dependency for a different module.",
+      "settings": []
+    },
+    {
+      "id": "tokenmagic",
+      "name": "Token Magic FX",
+      "url": "https://foundryvtt.com/packages/tokenmagic/",
+      "category": "Agnostic Recommended",
+      "tags": ["Dependency", "Cosmetic"],
+      "note": "Various effects applicable to the token images, including both static and animated. It's nice, even though my experience of using it with dynamic tokens have been mixed (because the dynamic tokens I make tend to have a lot of extra padding). It's required for at least some modules here, and it can be used separately to apply token and template effects.",
+      "settings": [
+        {
+          "path": ["Enable automatic template effects"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": "Not a fan at all. They stretch wierdly, don't match the shapes for circles, and generally look kinda iffy. The functionality itself is great, it's just the presets that are lacking. Genga will prompt you to disable it on startup."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-tokens-monster-core",
+      "name": "Pathfinder Tokens: Monster Core",
+      "url": "https://foundryvtt.com/packages/pf2e-tokens-monster-core",
+      "category": "System Useful",
+      "tags": ["Cosmetic", "UI and QoL", "Paid"],
+      "note": "It saves time, especially if you're not comfortable making pop-out tokens yourself. The artwork is all available online (not on Nethys anymore, but Demiplane still has it), so it's really just convenience.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-tokens-monster-core-2",
+      "name": "Pathfinder Tokens: Monster Core 2",
+      "url": "https://foundryvtt.com/packages/pf2e-tokens-monster-core-2",
+      "category": "System Useful",
+      "tags": ["Cosmetic", "UI and QoL", "Paid"],
+      "note": "Same reasoning as Monster Core 1, saves you time. Has some art not on the Demiplane, presumably?",
+      "settings": []
+    },
+    {
+      "id": "pf2e-tokens-npc-core",
+      "name": "Pathfinder Tokens: NPC Core",
+      "url": "https://foundryvtt.com/packages/pf2e-tokens-npc-core",
+      "category": "System Useful",
+      "tags": ["Cosmetic", "UI and QoL", "Paid"],
+      "note": "Same as Monster Core, but for NPCs. I do find this one a little bit more useful, because it's such a common occurance to need a token for a bystander of some sorts. It's nice to have a proverbial commoner or innkeeper at the ready.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-tokens-bestiaries",
+      "name": "Pathfinder Tokens: Bestiaries",
+      "url": "https://foundryvtt.com/packages/pf2e-tokens-bestiaries",
+      "category": "System Useful",
+      "tags": ["Cosmetic", "UI and QoL", "Paid"],
+      "note": "These are the ones from premaster times. A lot of these are covered by Monster Core and Monster Core 2. Some artworks were changed though, so if you have both you might have more options. Very low priority, but not useless even in remaster days.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-tokens-myth-and-magic",
+      "name": "Pathfinder Tokens: Myth and Magic",
+      "url": "https://foundryvtt.com/packages/pf2e-tokens-myth-and-magic",
+      "category": "System Useful",
+      "tags": ["Cosmetic", "UI and QoL", "Paid"],
+      "note": "Same treatment as the main line modules for tokens from a variety of sources. I'd actually argue that these might be more useful than the Core ones, because you can stumble upon some really cool artwork that you likely wouldn't have found otherwise by just searching for an 'Ogre Warrior' or whatnot. Doubly so if you also have the character gallery.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-tokens-draconic-codex",
+      "name": "Pathfinder Tokens: Draconic Codex",
+      "url": "https://foundryvtt.com/packages/pf2e-tokens-draconic-codex",
+      "category": "System Useful",
+      "tags": ["Cosmetic", "UI and QoL", "Paid"],
+      "note": "Latest at the time of writing. I think it overlaps a bit with the Core modules, but it does have all of the new shiny dragons from the Draconic Codex.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-tokens-characters",
+      "name": "Pathfinder Tokens: Character Gallery",
+      "url": "https://foundryvtt.com/packages/pf2e-tokens-characters",
+      "category": "System Recommended",
+      "tags": ["Cosmetic", "UI and QoL", "Paid"],
+      "note": "If you're wondering which token pack to buy, I would actually highly suggest this over anything else. Huge variety of artwork, but the important part is the gallery itself -- you can filter for specific things and then just drag-and-drop onto an existing actor. You don't really _need_ a goblin warrior token from the Monster Core if you can just look up _a_ goblin whose look you like and assign that artwork to the actor which is already shipped as part of PF2e system. And if you get more modules with art, the Character Gallery picks them up as well. Highly recommended.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-apparatus",
+      "name": "PF2e Apparatus",
       "url": "",
-      "category": "Core Recommended",
-      "tags": ["Audio-visual"],
-      "note": "",
+      "category": "Other",
+      "tags": ["Automation", "UI and QoL"],
+      "note": "At the time of writing, this is not released. Appratus is my own module, with the goal of automating not just specific actions, but the flow of combat as well. In my eyes, clicking a 'Vicious Swing' should visibly cost 2 actions, prompt the user for a target, resolve an attack, roll the damage (if hit) with the bonus dice included. This is not the typical style of play and this module will not be for everyone, but it's how I see the automation on Foundry play out for myself. At least in a game as well-supported as PF2e. I will not be beating the 'video-game' allegations.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-afflictioner",
+      "name": "PF2e Afflictioner",
+      "url": "https://foundryvtt.com/packages/pf2e-afflictioner",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "While it's, frankly, a mess, and has a lot of bugs no matter what I try to do with it, ultimately it's still the best way to track afflictions. By a mile. Just be sure to not leave it all to the automation and keep an eye on the manual management.",
+      "settings": [
+        {
+          "path": ["Require Save Confirmation"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Like it says on the tin, allows for rerolls. Also useful in case someone forgot to apply some sort of bonus or penalty."
+        },
+        {
+          "path": ["Anonymize Save Messages"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Use Application Initiative"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This is _probably_ RAW. The problem is, both this being false and true I'm still experiencing desyncs from time to time. I am not sure what's causing them, but you might need to mannually do things either way."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-alchemist-remaster-ducttape",
+      "name": "PF2e Alchemist Remaster Duct Tape",
+      "url": "https://foundryvtt.com/packages/pf2e-alchemist-remaster-ducttape",
+      "category": "System Recommended",
+      "tags": ["Automation", "UI and QoL"],
+      "note": "What a fantastic module. While the baseline Quick Alchemy is very good now, this adds some extra QoL for alchemists. The only reason you wouldn't want this module is if there are no alchemists in the party. And even then it works with Wandering Chefs, Munitions Crafter, and archetypes.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-avatars",
+      "name": "PF2e Avatars",
+      "url": "https://foundryvtt.com/packages/pf2e-avatars",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "I haven't tested it thoroughly, but from what I've seen I'm very impressed. Automated battle forms, and it even grabs relevant pictures if you have the token modules. One just doesn't get many opportunities to test how robust a rank 10 spell automation is.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-avatars",
+      "name": "PF2e Avatars",
+      "url": "https://foundryvtt.com/packages/pf2e-avatars",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "I haven't tested it thoroughly, but from what I've seen I'm very impressed. Automated battle forms, and it even grabs relevant pictures if you have the token modules. One just doesn't get many opportunities to test how robust a rank 10 spell automation is.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-avoid-notice",
+      "name": "PF2e Avoid Notice",
+      "url": "https://foundryvtt.com/packages/pf2e-avoid-notice",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "On its own, it compared the stealth check of allied who try to Avoid Notice with the Perception of enemies. When paired with Visioner, it automates the process. I'd say that this module is always worth it, Visioner is another story.",
+      "settings": [
+        {
+          "path": ["Pan/Zoom to combat"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": "Personal preference."
+        },
+        {
+          "path": ["Toggle on GM-Hidden combatants at  Combat Start"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Safe to use with another layer of automation. Ensures you're not accidentally moving hidden tokens around. You might want to NOT use it if you don't use Visioner."
+        },
+        {
+          "path": ["Raise PC shields when Defending"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": "I am using other automations for this exploration activity."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-visioner",
+      "name": "PF2e Visioner",
+      "url": "https://foundryvtt.com/packages/pf2e-visioner",
+      "category": "System Useful",
+      "tags": ["Automation"],
+      "note": "I am on the fence about Visioner. On one hand, it supposedly automates the thing that is incredibly annoying to even try to track without it. On another, it's a massive performance hit, and it constantly runs into issues. In recent versions I ran into bugs that really slowed things down, but supposedly that should be fixed now. For now I'll keep using it and I can tentatively recommend it for the good it does.",
+      "settings": [
+        {
+          "path": ["Require GM Approval for Door Peek"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Safety precaution. I also suggest you check the keybinding to set them as you like, and sync that with your players."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-creature-sounds",
+      "name": "PF2e Creature Sounds",
+      "url": "https://foundryvtt.com/packages/pf2e-creature-sounds",
+      "category": "System Useful",
+      "tags": ["Cosmetic"],
+      "note": "I'd say it's not for everyone, but I find it nice to have some extra sounds here and there. Some of them are a bit on the 'funni' side though, and the variety is limited. If you're willing to go the extra mile and do your own sound sets, this is by far the best way to do it, though.",
+      "settings": [
+        {
+          "path": ["Creature sound volume"],
+          "from": ["0.5"],
+          "to": ["0.2"],
+          "reasoning": "Preference, match to the comfort level. Keep in mind that this is a client-side setting and you might want to let your players know that they can change it."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-animal-companions",
+      "name": "PF2e Companion Compendia",
+      "url": "https://foundryvtt.com/packages/pf2e-animal-companions",
+      "category": "System Essential",
+      "tags": ["Automation"],
+      "note": "It's kinda wild that there's still nothing for it in core in the big 2026. This module is basically a requirement if any of your players have any animal companions, eidolon, or followers, or whatever else.",
+      "settings": [
+        {
+          "path": ["Creature sound volume"],
+          "from": ["0.5"],
+          "to": ["0.2"],
+          "reasoning": "Preference, match to the comfort level. Keep in mind that this is a client-side setting and you might want to let your players know that they can change it."
+        }
+      ]
+    },
+    {
+      "id": "xdy-pf2e-workbench",
+      "name": "PF2e Workbench",
+      "url": "https://foundryvtt.com/packages/xdy-pf2e-workbench",
+      "category": "System Essential",
+      "tags": ["Automation"],
+      "note": "Well, it's the workbench. A treasure trove of useful settings, really. Pretty much just a direct extension of the baseline PF2e System.",
+      "settings": [
+        {
+          "path": ["NPC Item Mystification Settings", "Mystify alchemical and magical items on npcs, if the PF2e system setting NPCs are lootable is enabled."],
+          "from": ["No item mystification"],
+          "to": ["Mystify items on npc reaching 0 hp"],
+          "reasoning": "This makes the gear on enemies readable as a GM, but mystifies it when they fall."
+        },
+        {
+          "path": ["NPC Item Mystification Settings", "Use party level as base for per-rarity thresholds"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "I like to set it so the party auto-identifies items that are lower level than them."
+        },
+        {
+          "path": ["NPC Item Mystification Settings", "Mystify threshold (party-relative): Common"],
+          "from": ["Not mystified"],
+          "to": ["PL"],
+          "reasoning": "This makes it so if the party is level 12, and an item is level 11 or lower, it will remain revealed. You can also set it for other rarities, I have Uncommon at PL-1, Rare at PL-2, and Unique at PL-4."
+        },
+        {
+          "path": ["Reminder Settings", "Targeting reminder"],
+          "from": ["No reminder"],
+          "to": ["Reminder"],
+          "reasoning": "I believe that it's usually better to have your players learn to target things to speed up combat. You can also set it to cancel an untargeted attack instead."
+        },
+        {
+          "path": ["Reminder Settings", "Who gets an actions reminder"],
+          "from": ["None"],
+          "to": ["All"],
+          "reasoning": "Reminds people about Slowed, Stunned, and Quickened."
+        },
+        {
+          "path": ["Reminder Settings", "Recharge reminder (e.g. breath weapons)"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This is great. Except that it's broken. RAW, a roll of a 1 on the recharge means that the ability will be unavailable for a WHOLE round. So if a creature breathes on round 3, gets 1 on recharge, they'll be able to breathe on round 5, not 4. In Workbench implementation, it's one less than intended. I plan on opening an issue about it."
+        },
+        {
+          "path": ["Reminder Settings", "... but hide non-party reminder."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Keep 'em guessing."
+        },
+        {
+          "path": ["Reminder Settings", "Enable Hero Point handler"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "There's so much functionality to this that it could've been its own module. It's awesome. Configure the rest as you like."
+        },
+        {
+          "path": ["World QoL Settings", "Allow scaling NPCs"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Nice little utility to bring NPCs to specific levels, preserving their proficiency in aspects."
+        },
+        {
+          "path": ["World QoL Settings", "Enable NPC roller utility"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Find it at the bottom of the journal tab. Basically it allows you to improvise rolls. Imagine you suddenly need a level 4 baker to perform their Crafting check, and you consider them Extreme at what they do. Without needing to look up GM tables, you can go to NPC roller -> Skills -> Level 4 Extreme and have your result at the ready (or set the DC to be 10+that number)."
+        },
+        {
+          "path": ["World QoL Settings", "Ctrl-click Cast to cast in private"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This suite of configs is a great way to mistify spells while letting people still interact with them."
+        },
+        {
+          "path": ["World QoL Settings", "... and list the party members that know the autorevealed spell"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World QoL Settings", "... but always cast privately for:"],
+          "from": ["None"],
+          "to": ["NPCs"],
+          "reasoning": "Sets it as default."
+        },
+        {
+          "path": ["World QoL Settings", "Post public message that a spell has been cast."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "And this lets players still perform saves if needed or try to recognize a spell."
+        },
+        {
+          "path": ["World QoL Settings", "... and show the public message to the gm also."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World QoL Settings", "... and show spell traits in the public message."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World QoL Settings", "... but exclude these traits from the public message"],
+          "from": [""],
+          "to": ["mental", "illusion"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World QoL Settings", "Show feat names in rarity colour on actor sheets."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This and the next 3 settings are just cosmetic. I like the way they look."
+        },
+        {
+          "path": ["World Automation Settings", "Setting initiative to just before the current combatant"],
+          "from": ["Never"],
+          "to": ["When character combatant reacher 0 HP."],
+          "reasoning": "This and almost everything after in this category is almost pure automation. I don't see a reason to not have it on."
+        },
+        {
+          "path": ["World Automation Settings", "Automatically apply persistent damage."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "... and automatically roll recovery after that."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Automatically apply persistent healing rolled by the system."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Automatically reduce stunned on turn start"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Automatically give unconscious if Dying removed at 0 HP."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Automatically remove unconscious if healed to greater than 0 HP."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Automatically give Wounded when Dying is removed"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Automatically increase Dying at 0 HP."],
+          "from": ["No"],
+          "to": ["Add 1 + Wounded level, for characters+familiars"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "... depending on if last damage was nonlethal."],
+          "from": ["Nonlethal damage is just damage"],
+          "to": ["Nonlethal doesn't kill characters+familiars"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "... and add one more dying if critically damaged by an enemy."],
+          "from": ["No"],
+          "to": ["Add dying, for characters+familiars"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "... and add additional dying level(s) if taking damage when dying."],
+          "from": ["No"],
+          "to": ["Add dying, for characters+familiars"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Automatically remove Dying when healed to above 0 HP."],
+          "from": ["No"],
+          "to": ["Remove Dying, for characters+familiars"],
+          "reasoning": ""
+        },
+        {
+          "path": ["World Automation Settings", "Characters automatically drop held items on becoming unconscious."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Manage Client Automation Settings", "Automatically decrease the frightened condition each turn."],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "trigger-engine",
+      "name": "Trigger Engine",
+      "url": "https://foundryvtt.com/packages/trigger-engine",
+      "category": "System Recommended",
+      "tags": ["Automation", "Dependency"],
+      "note": "For a while now Trigger has been the new big name on the block for Foundry Automation. It's a set of tools to set up sequences of interaction with the Foundry's 'insides', and the sky's the limit, especially if you're comfortable with macros. The Trigger Trove has some PF2e automations and is still being updated.",
+      "settings": [
+        {
+          "path": ["Register Triggers"],
+          "from": ["None"],
+          "to": ["Whichever you want"],
+          "reasoning": "This will depend on whether you use any other automation modules. For example, I don't have the Dying & Wounded enabled, because for now I prefer the Workshop implementation. This might change in the future though."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-trigger-trove",
+      "name": "Trigger Trove",
+      "url": "https://foundryvtt.com/packages/pf2e-trigger-trove",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "If you're using Trigger Engine, I highly recommend installing this. Both because it's a set of good automations, but also because these are great illustrations for how you can make your own.",
+      "settings": []
+    },
+    {
+      "id": "phils-pf2e-action-colours",
+      "name": "Phil's PF2e Action Colours 🚥",
+      "url": "https://foundryvtt.com/packages/phils-pf2e-action-colours",
+      "category": "System Recommended",
+      "tags": ["UI and QoL"],
+      "note": "Seems to generally work better than Wayfinder. Still not perfect, but that's just system complexity issues.",
+      "settings": [
+        {
+          "path": ["Open Configuration", "PF2e Rules & Routing", "Smart Routing (A* Pathfinding)"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Helps prevent players from getting stuck at walls. I'd advise on keeping it 'Only in Combat', since otherwise it's possible to 'feel' through fog of war, even unintenionally. But it's, ultimately, preference."
+        },
+        {
+          "path": ["Open Configuration", "Ghost Trail", "Share Ghost Trails"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Settings here are almost entirely preference. I like the idea of showing the pathing to other players, since it helps them figure out where someone might've went."
+        }
+      ]
+    },
+    {
+      "id": "psfx",
+      "name": "PSFX - Peri's Sound Effects",
+      "url": "https://foundryvtt.com/packages/psfx",
+      "category": "Dependency",
+      "tags": ["Dependency", "Cosmetic"],
+      "note": "I treat the free version of this as a dependency, since there are at least a couple of things that use it, or used to use it. Might as well have it around.",
+      "settings": []
+    },
+    {
+      "id": "psfx-ambience",
+      "name": "PSFX - Ambience",
+      "url": "https://www.patreon.com/PeriSFX",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic", "Paid"],
+      "note": "One of three paid PSFX modules. Do you need sounds? You can have sounds. There's only a couple of them though.",
+      "settings": []
+    },
+    {
+      "id": "psfx-music",
+      "name": "PSFX - Music",
+      "url": "https://www.patreon.com/PeriSFX",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic", "Paid"],
+      "note": "Another of the three. It's not very populated at the moment, but the tracks sound nice.",
+      "settings": []
+    },
+    {
+      "id": "psfx-patreon",
+      "name": "PSFX - Patreon",
+      "url": "https://www.patreon.com/PeriSFX",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic", "Paid"],
+      "note": "Expanded version of the free stuff. Get it for more sound effects if you want to play around with that. IMPORTANT: Disable the free module if you do. Sequencer gets confused otherwise and you'll run into errors. Unlike JB2A, Sequencer cannot combine the free and paid versions into one shared database.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-bard-helper",
+      "name": "PF2e Bard Helper",
+      "url": "https://foundryvtt.com/packages/pf2e-bard-helper",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "Like with the Alchemist Duct Tape, the only reason you wouldn't want this is if there are no bards in your party. It does a great job of maintaining the effects and spells RAW.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-dailies",
+      "name": "PF2e Dailies",
+      "url": "https://foundryvtt.com/packages/pf2e-dailies",
+      "category": "System Essential",
+      "tags": ["Automation"],
+      "note": "Adds a button to the character sheet to automate a lot of daily preparations, such as staves, commander tactics, familiar abilities. You can even add your own!",
+      "settings": []
+    },
+    {
+      "id": "pf2e-effects-halo",
+      "name": "PF2e Effect Halo",
+      "url": "https://foundryvtt.com/packages/pf2e-effects-halo",
+      "category": "System Essential",
+      "tags": ["UI and QoL"],
+      "note": "Gotta give it the 'essential' rating, seeing how many effects a character can have in PF2e and how awful they look in the core system.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-extempore-effects",
+      "name": "pf2E Extempore Effects",
+      "url": "https://foundryvtt.com/packages/pf2e-extempore-effects",
+      "category": "System Essential",
+      "tags": ["Automation"],
+      "note": "Try as you might to automate everything, you will run into missing bits and pieces everywhere. Extempore is a way to apply basically the text of a chat message to a token. It parses some text, such as duration, automatically.",
+      "settings": [
+        {
+          "path": ["Notifications for expired events"],
+          "from": ["All effects"],
+          "to": ["Disabled"],
+          "reasoning": "Never felt necessary to me, but it's a preference."
+        },
+        {
+          "path": ["Shorten 'Stage 2' to e.g. '[2/6]' in effect badges"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Personal preference."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-eidolon-helper",
+      "name": "PF2e Eidolon Helper",
+      "url": "https://foundryvtt.com/packages/pf2e-eidolon-helper",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "Number three of the 'required' modules if you've got a certain class in your game. The usage might not be obvious -- you will need to link a summoner and their eidolon with a macro.",
+      "settings": [
+        {
+          "path": ["EVERYTHING"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "All of these settings are RAW. All of them seem functional. So just enable everything."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-see-simple-scale-statistics",
+      "name": "pF2e See Simple Scale Statistics",
+      "url": "https://foundryvtt.com/packages/pf2e-see-simple-scale-statistics",
+      "category": "System Recommended",
+      "tags": ["Backend"],
+      "note": "This is a very simple utility that lets you see how a creature's stats compare to its level. For example you can see if the creature has average, high, or extreme AC for its level. It will also warn you if something is 'off' about a creature, like having too many weak stats or vice versa.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-specific-familiars",
+      "name": "PF2e Specific Familiars",
+      "url": "https://foundryvtt.com/packages/pf2e-specific-familiars",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "Cousin-compendium to PF2e Creature Compendia, adding the abilities for the 'specific familiars'. No reason not to use.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-modifiers-matter",
+      "name": "Pf2E Modifiers Matter",
+      "url": "https://foundryvtt.com/packages/pf2e-modifiers-matter",
+      "category": "System Recommended",
+      "tags": ["UI and QoL"],
+      "note": "I am incredibly close to declaring this as essential purely because of how relevant it is to discussions around PF2e and players' understanding of the system. Seeing constant highlights of what exactly contributed to a roll does wonders.",
+      "settings": [
+        {
+          "path": ["Ignore Crit Fail over Fail on attacks"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Unless your party's got a swashbuckler, then you might as well have it on."
+        }
+      ]
+    },
+    {
+      "id": "more-dynamic-token-rings",
+      "name": "SETT: Some Extra Token (ring) Types",
+      "url": "https://foundryvtt.com/packages/more-dynamic-token-rings",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic"],
+      "note": "This adds some more dynamic rings, but the main benefit is being able to add your own! If you figure out how to make them, SETT will handle making them interactable on Foundry.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-reactive-token-ring",
+      "name": "REDY: Reactive Dynamic Token Rings",
+      "url": "https://foundryvtt.com/packages/pf2e-reactive-token-ring",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic"],
+      "note": "This is a dependency for SETT, and it has some cute features of its own. It can flash the dynamic ring in colors, such as when creatures take damage or are healed.",
+      "settings": [
+        {
+          "path": ["Target uses Player Color"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This and the other settings here are purely cosmetic and personal preference. Experiment and see what you like."
+        },
+        {
+          "path": ["[Color] Positive Condition"],
+          "from": ["??"],
+          "to": [""],
+          "reasoning": "Personal preference, I don't like condition flashing."
+        },
+        {
+          "path": ["[Color] Negative Condition"],
+          "from": ["??"],
+          "to": [""],
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "pf2e-summons-assistant",
+      "name": "PF2e Summons Assistant",
+      "url": "https://foundryvtt.com/packages/pf2e-summons-assistant",
+      "category": "System Essential",
+      "tags": ["Automation"],
+      "note": "This helps out SO MUCH I'm putting it into the Essential category. A ton of automations, and full usability of any 'Summon' spells.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-brewrata",
+      "name": "PF2e Brewrata",
+      "url": "https://foundryvtt.com/packages/pf2e-brewrata",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "Used by the Summons Assistant. I am not entirely sure about using it on its own for now, but there is potential here.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-sustain-reminder",
+      "name": "Pf2e Sustain Reminder",
+      "url": "https://foundryvtt.com/packages/pf2e-sustain-reminder",
+      "category": "System Recommended",
+      "tags": ["Dependency", "UI and QoL"],
+      "note": "Used by the Summons Assistant. And it's still good on its own -- it creates a reminder effect for spells you're sustaining, and drops a chat card when your turn begins.",
+      "settings": []
+    },
+    {
+      "id": "lib-item-select-dialog",
+      "name": "Library: Item Select Dialog",
+      "url": "https://foundryvtt.com/packages/lib-item-select-dialog",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "Used by the Kineticist Companion. No harm in having it.",
+      "settings": []
+    },
+    {
+      "id": "portal-lib",
+      "name": "Portal",
+      "url": "https://foundryvtt.com/packages/portal-lib",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "Used by the Kineticist Companion. No harm in having it.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-kineticists-companion",
+      "name": "PF2e Kineticist's Companion",
+      "url": "https://foundryvtt.com/packages/pf2e-kineticists-companion",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "Some nice things for a couple of Kineticist abilities. Keep in mind that Thermal Nimbus is also automated by Trigger Engine, so you'll need to disable it there (Kineticist Companion does not have a way to disable an automation, unfortunately).",
+      "settings": []
+    },
+    {
+      "id": "tokenmagic-automatic-wounds",
+      "name": "TokenMagic Automatic Wounds",
+      "url": "https://foundryvtt.com/packages/tokenmagic-automatic-wounds",
+      "category": "Agnostic Useful",
+      "tags": ["Cosmetic"],
+      "note": "I had no idea this token existed until recently, having been doing a similar thing by hand. It seems pretty nice, though I would appreciate if there was an option for it to not work for certain traits, like Construct or Ooze. It's possible to manually change the blood type and disable it work specific tokens though (check the Macros for that).",
+      "settings": []
+    },
+    {
+      "id": "pf2e-aztecs-inline-builder",
+      "name": "PF2e Aztec's Inline Builder",
+      "url": "https://foundryvtt.com/packages/pf2e-aztecs-inline-builder",
+      "category": "Agnostic Recommended",
+      "tags": ["Backend"],
+      "note": "This is purely a utility to construct an inline PF2e thing quickly. Saves time if you're fully making your own adventures, hazards, and whatnot.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-usage-updater",
+      "name": "PF2e Usage Updater",
+      "url": "https://foundryvtt.com/packages/pf2e-usage-updater",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "Does exactly what it says on the tin -- checks the time having passed for things with cooldown and updates them accordingly. So if someone uses a 1/hour ability, it will be available again after an hour passes in game time.",
+      "settings": [
+        {
+          "path": ["Automate Aeon Stone (Pearly White Spindle)"],
+          "from": ["Disabled"],
+          "to": ["Automatic"],
+          "reasoning": "I like the automation, and it's a popular item."
+        },
+        {
+          "path": ["Show only for GMs"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": "Not sure why it wouldn't be enabled, it shouldn't be an issue for players to see the cooldown of their abilities."
+        },
+        {
+          "path": ["How to show time remaining?"],
+          "from": ["Symbols"],
+          "to": ["All Units, Full Unit Name"],
+          "reasoning": "In case you want to look up how long exactly until an action is refreshed."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-item-activations",
+      "name": "PF2e Item Activations",
+      "url": "https://foundryvtt.com/packages/pf2e-item-activations",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "Really nice module that adds actions embedded into items in the character's inventory. For example, if a character gets the 'Bracelets of Dashing', they'll also find the 'Jangling Dash' action on their character sheet, with proper cooldown tracking and all. Additionally, the actions are generated by parsing text, so it will work even with the homebrew items you make!",
+      "settings": []
+    },
+    {
+      "id": "sundry",
+      "name": "Sundry. Small Tidbits for (Mostly) PF2e",
+      "url": "https://foundryvtt.com/packages/sundry",
+      "category": "System Essential",
+      "tags": ["Automation", "UI and QoL"],
+      "note": "This is basically a bunch of small fixes in one module, which is nice.",
+      "settings": [
+        {
+          "path": ["Message Header to User Color"],
+          "from": ["Off"],
+          "to": ["20%"],
+          "reasoning": "Makes the chat messages a little bit more distinct."
+        },
+        {
+          "path": ["Item Property Runes"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Item Property Runes on Actor Sheet"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Weapon Base Damage"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Item Mystification Helper (Misidentification)"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "It's a cute idea. Unfortunately it doesn't quite work. A non-identified item is distinct by lacking a value and an edit button, so any player can clearly see what it really is. If they are able to suspend disbelief, it's just a shortcut for the GMs to not bother with swapping out items entirely."
+        },
+        {
+          "path": ["Heaader Button Text"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Much better, otherwise the headers of actors get completely flooded from all the things injected into them."
+        },
+        {
+          "path": ["Sell All Treasure"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Prone Tokens - Rotate"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Prone is a very common condition, and it's nice to have a distinct visual effect to it."
+        },
+        {
+          "path": ["Loading Tips Journal UUID"],
+          "from": [""],
+          "to": ["---"],
+          "reasoning": "You can set up a journal with loading tips, to remind people that they should be striking at -10 MAP, as Valeros intended."
+        },
+        {
+          "path": ["PF2e Toolbelt - Target Helper Unrolled Roll"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Makes the roll button stand out a bit more."
+        },
+        {
+          "path": ["Random Location Picker"],
+          "from": ["Off"],
+          "to": ["GM Only"],
+          "reasoning": "This is new to me, but it seems pretty fun. Let's fate decide the direction of some abilities and whatnot."
+        },
+        {
+          "path": ["Reaction Usage"],
+          "from": ["Off"],
+          "to": ["All Features"],
+          "reasoning": "Now, an important note -- I don't actually use this setting anymore. I switched to tracking reactions my own way. But it's in a home module that I'm not releasing publicly yet, and the Sundry implementation covers most of what you might need."
+        },
+        {
+          "path": ["Flourish Usage"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "pf2e-hud",
+      "name": "PF2e HUD",
+      "url": "https://foundryvtt.com/packages/pf2e-hud",
+      "category": "System Essential",
+      "tags": ["UI and QoL"],
+      "note": "I will boldly proclaim PF2e HUD to be essential. The amount of utility it brings, along with how neatly arranged everything is just can't be beat. Plus, it has an incredibly level of customization, so you can keep exactly the parts you want.",
+      "settings": [
+        {
+          "path": ["Config Health Status", "Enabled"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": "I show my players enemies' health bars, just without the actual numerical value, so the health status is redundant for my needs. I still have it configured to just show whether someone is above or below 50% health just in case."
+        },
+        {
+          "path": ["Hide Format Panel"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Doesn't seem necessary at all."
+        },
+        {
+          "path": ["Party Alliance as Observed"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Shows the actual numerical HP for player characters."
+        },
+        {
+          "path": ["Selection Mode"],
+          "from": ["Manual Selection"],
+          "to": ["On Token Selection"],
+          "reasoning": "Please note that this is only for myself, the GM. For players, I keep it soft-locked at 'Manual Selection'."
+        },
+        {
+          "path": ["Extra Shortcut Slots"],
+          "from": ["0"],
+          "to": ["6"],
+          "reasoning": "Preference. And this is a client side thing, so players can select their own."
+        },
+        {
+          "path": ["Activation Mode"],
+          "from": ["On First Click"],
+          "to": ["Disabled"],
+          "reasoning": "I don't really like the Token HUD here, it's a bit bloated and really big. But you may choose to keep it around."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-hud-colors",
+      "name": "PF2E HUD Colors",
+      "url": "https://foundryvtt.com/packages/pf2e-hud-colors",
+      "category": "System Recommended",
+      "tags": ["UI and QoL"],
+      "note": "If there is one criticism of HUD I have is that it's very gray-looking. This fixes it, and the colours are really well-selected.",
+      "settings": []
+    },
+    {
+      "id": "trigger-animations",
+      "name": "Trigger Animations",
+      "url": "https://wiki.mrvauxs.net/reference/trigger-animations/",
+      "category": "System Recommended",
+      "tags": ["Cosmetic", "Dependency"],
+      "note": "If you've been around for a while, you might remember PF2e Graphics, which never got updated for V13 properly. THIS is its 'spiritual successor', wired to work in the same framework as Trigger Animations. It has a steeper learning curve than Automated Animations or even the BLFX Animation Editor, but I'd still suggest going with it. Even if you don't want to learn how to make your own animations, the trove of them is constantly being updated.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-trigger-animations-trove",
+      "name": "Trigger Animation Trove (PF2e / SF2e)",
+      "url": "https://foundryvtt.com/packages/pf2e-trigger-animations-trove",
+      "category": "System Recommended",
+      "tags": ["Cosmetic"],
+      "note": "This is a collection of ready-made animations for PF2e using Trigger Animations. Note that it's built around the patreon version of JB2A. Some animations have workarounds.",
+      "settings": []
+    },
+    {
+      "id": "ggg",
+      "name": "GGG: Sequencer Sound DB Collection",
+      "url": "https://foundryvtt.com/packages/ggg",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "Used by Trigger Animation Trove in place of PSFX.",
+      "settings": []
+    },
+    {
+      "id": "fvtt-perf-optim",
+      "name": "Prime Performance",
+      "url": "https://foundryvtt.com/packages/fvtt-perf-optim",
+      "category": "Agnostic Useful",
+      "tags": ["Backend"],
+      "note": "Haven't used it before, currently trying it out to see if anything goes wrong.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-ranged-combat",
+      "name": "PF2e Ranged Combat",
+      "url": "https://foundryvtt.com/packages/pf2e-ranged-combat",
+      "category": "System Useful",
+      "tags": ["Automation"],
+      "note": "Since ammo has been added to the core PF2e itself, it's been rough with the module. In core, enemies don't expend ammo automatically. With this module installed, they expend double ammo on each shot -- but only for no reload weapons. If you use the NPC configurator, you can fix it, assigning the weapons correctly and it will only consume 1 ammo. I am, frankly, on the fence about this one, and I am not sure I will continue using it for the time being. FOr the time being, I will try and update this document with my findings.",
+      "settings": [
+        {
+          "path": ["Prevent FIring Weapon if not Loaded"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Experimenting with this, seems like it might be making things work even without extra settings. More testing needed."
+        },
+        {
+          "path": ["Require Ammunition to Fire"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "pf2e-flatcheck-helper",
+      "name": "PF2e Utility Buttons",
+      "url": "https://foundryvtt.com/packages/pf2e-flatcheck-helper",
+      "category": "System Recommended",
+      "tags": ["Automation"],
+      "note": "I prefer Utility Buttons over PF2e Flat Check because it doesn't split into a separate message and can be rerolled. It does have a habit of attaching an effect to _everything_ an actor does, but it's not that big of a deal.",
+      "settings": [
+        {
+          "path": ["Flat Check Config", "Target - Light Level"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Show Delay Button in Combat Tracker"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Show Delay Button in Token Hud"],
+          "from": ["true"],
+          "to": ["false"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Modify PF2e HUD"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Alternative Roll Breakdowns"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This is nice. It keeps the full breakdown of a roll hidden from players, but does show things like MAP and circ/status modifiers, information which is arguably accessible narratively."
+        }
+      ]
+    },
+    {
+      "id": "pf2e-subsystems",
+      "name": "PF2e Subsystems",
+      "url": "https://foundryvtt.com/packages/pf2e-subsystems",
+      "category": "System Useful",
+      "tags": ["UI and QoL"],
+      "note": "This is basically a frontend UI for Influence, Research, Chases, and Infiltrations. It sticks to RAW and presents them to players in a distinct UI.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-subsystem-theming",
+      "name": "PF2e Subsystem Theming",
+      "url": "https://foundryvtt.com/packages/pf2e-subsystem-theming",
+      "category": "Dependency",
+      "tags": ["Dependency", "Backend"],
+      "note": "Required for Subsystems and Bestiary. You can also set up your own custom themes within.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-bestiary-tracking",
+      "name": "PF2e Bestiary Tracking",
+      "url": "https://foundryvtt.com/packages/pf2e-bestiary-tracking",
+      "category": "System Recommended",
+      "tags": ["UI and QoL"],
+      "note": "This lets players keep track of enemies, NPCs, and hazards they've encountered. The specifics and settings are highly up to you and your GMing style.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-bestiary-tracking",
+      "name": "PF2e Bestiary Tracking",
+      "url": "https://foundryvtt.com/packages/pf2e-bestiary-tracking",
+      "category": "System Recommended",
+      "tags": ["UI and QoL"],
+      "note": "This lets players keep track of enemies, NPCs, and hazards they've encountered. The specifics and settings are highly up to you and your GMing style.",
+      "settings": []
+    },
+    {
+      "id": "battlezoo-eldamon-pf2e",
+      "name": "Battlezoo: Eldamon for Pathfinder 2e | Roll For Combat",
+      "url": "https://foundryvtt.com/packages/battlezoo-eldamon-pf2e",
+      "category": "Content",
+      "tags": ["Content - GM", "Content - Player", "Paid"],
+      "note": "It's just like that one obscure Nintendo franchise! This is definitely not everyone's cup of tea, and it clashes startkly with PF2e. But I would say that the Elemental Avatar slots in very nicely into PF2e as-is. The Eldamon barely comes up, so you're just playing an alternative Kineticist with 13 various elements.",
+      "settings": []
+    },
+    {
+      "id": "battlezoo-ancestries-dragons-pf2e",
+      "name": "Battlezoo Ancestries: Dragons for PF2e by Roll for Combat",
+      "url": "https://foundryvtt.com/packages/battlezoo-ancestries-dragons-pf2e",
+      "category": "Content",
+      "tags": ["Content - Player", "Paid"],
+      "note": "Adds the dragon ancestry. Not 'dragonborn', or 'dragonblood', or whatever else, straight up just dragon. The explanation is incredibly thin, but if someone really wants to play a dragon, this is the way.",
+      "settings": []
+    },
+    {
+      "id": "battlezoo-ancestries-dragons-pf2e",
+      "name": "Battlezoo Ancestries: Dragons for PF2e by Roll for Combat",
+      "url": "https://foundryvtt.com/packages/battlezoo-ancestries-dragons-pf2e",
+      "category": "Content",
+      "tags": ["Content - Player", "Paid"],
+      "note": "Adds the dragon ancestry. Not 'dragonborn', or 'dragonblood', or whatever else, straight up just dragon. The explanation is incredibly thin, but if someone really wants to play a dragon, this is the way.",
+      "settings": []
+    },
+    {
+      "id": "battlezoo-indigo-isles-pf2e",
+      "name": "Battlezoo Jewel of the Indigo Isles for PF2e | Roll For Combat",
+      "url": "https://foundryvtt.com/packages/battlezoo-indigo-isles-pf2e",
+      "category": "Content",
+      "tags": ["Content - GM", "Paid"],
+      "note": "Pirate-adjacent adventure path (levels 1-11), set in a world distinct from Golarion. Very whimsical and colorful. It does come with some player options, but I'd still say it's primarily GM content.",
+      "settings": []
+    },
+    {
+      "id": "battlezoo-world-of-indigo-isles-pf2e",
+      "name": "Battlezoo — World of Battlezoo: Indigo Isles for Pathfinder 2e",
+      "url": "https://foundryvtt.com/packages/battlezoo-world-of-indigo-isles-pf2e",
+      "category": "Content",
+      "tags": ["Content - GM", "Content - Player", "Paid"],
+      "note": "Think of this like 'Lost Omens: Indigo Isles', if it was mainline. Basically a book with both GM hooks, NPCs, and player options, all related to the setting. Obvious tie-in to the adventure itself.",
+      "settings": []
+    },
+    {
+      "id": "battlezoo-bestiary-pf2e",
+      "name": "Battlezoo Bestiary for PF2e by Roll For Combat",
+      "url": "https://foundryvtt.com/packages/battlezoo-bestiary-pf2e",
+      "category": "Content",
+      "tags": ["Content - GM", "Paid"],
+      "note": "That's one nice way to throw some curveballs at your players expecting familiar stat blocks. Once again, it does include SOME player content, but it's definitely not that focus.",
+      "settings": []
+    },
+    {
+      "id": "dd-import/",
+      "name": "Universal Battlemap Importer",
+      "url": "https://foundryvtt.com/packages/dd-import/",
+      "category": "Agnostic Useful",
+      "tags": ["Backend"],
+      "note": "I don't have a lot of experience with it, but it's for importing battlemaps, obviously enough.",
+      "settings": []
+    },
+    {
+      "id": "pf2e-rpg-numbers",
+      "name": "PF2e RPG Numbers & More",
+      "url": "https://foundryvtt.com/packages/pf2e-rpg-numbers",
+      "category": "System Recommended",
+      "tags": ["Cosmetic"],
+      "note": "It adds bells and whistles to things, like showing action results, damage dealt, and the like. I'd suggest you set it up to your liking, since all of it is purely taste-based.",
+      "settings": []
+    },
+    {
+      "id": "rideable",
+      "name": "Rideable",
+      "url": "https://foundryvtt.com/packages/rideable",
+      "category": "Agnostic Useful",
+      "tags": ["Automation"],
+      "note": "I have to admit I'm not exactly a fan of Rideable, but maybe I'm doing something wrong. It bugged out for me in a number of different ways over my time running games. And I'm not too happy that it relies on an unmaintained library. But if you've got a player using a mount, there's kinda-sorta no way around it.",
+      "settings": []
+    },
+    {
+      "id": "routinglib",
+      "name": "routinglib",
+      "url": "https://foundryvtt.com/packages/routinglib",
+      "category": "Dependency",
+      "tags": ["Dependency"],
+      "note": "Used by Rideable.",
+      "settings": [
+        {
+          "path": ["Rider movement default setting"],
+          "from": ["Disabled"],
+          "to": ["Move ridden Token (if owned)"],
+          "reasoning": ""
+        }
+      ]
+    },
+    {
+      "id": "pf2e-toolbelt",
+      "name": "PF2e Toolbelt",
+      "url": "https://foundryvtt.com/packages/pf2e-toolbelt",
+      "category": "System Essential",
+      "tags": ["UI and QoL", "Automation"],
+      "note": "Toolbelt adds so much that I can't place it as anything lower than Essential. It's basically Workbench 2 in my eyes.",
+      "settings": [
+        {
+          "path": ["Action Macro"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This allows you to drop a macro to be resolved when an action is used. I use it for my own automations, and it can be done with basically any macro you can cook up."
+        },
+        {
+          "path": ["Item Macro"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Spell Macro"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Both of these are arguably less necessary, but still fine to have on."
+        },
+        {
+          "path": ["Physical Actions"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This seems to do the same thing PF2e Item Activations does. But it only works WITH Item Activations enabled? I'm somewhat confused."
+        },
+        {
+          "path": ["Item Spell Casting"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Adds instances for wands/scrolls and the like."
+        },
+        {
+          "path": ["Use Consumable"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This is a better 'use' button than the one that's actually on consumables by default. It's a small triangle ('play') button in-line."
+        },
+        {
+          "path": ["Auto Self-Applied"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Applies the effects embedded in items and actions to the user."
+        },
+        {
+          "path": ["Walls Cover"],
+          "from": ["Disabled"],
+          "to": ["Center to Corners"],
+          "reasoning": "Since I'm considering dropping Visioner, I am testing out the cover system from Toolbelt."
+        },
+        {
+          "path": ["Creature Cover"],
+          "from": ["Disabled"],
+          "to": ["Intersect any side"],
+          "reasoning": "Same as above."
+        },
+        {
+          "path": ["Merge Button"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Useful for Force Barrage / Double Slice and whatever else combines damage before applying it."
+        },
+        {
+          "path": ["Damage Indicator"],
+          "from": ["Disabled"],
+          "to": ["Standalone Display"],
+          "reasoning": "Preference, it's a nice salt-meter."
+        },
+        {
+          "path": ["Show Avatar to Players"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Sort List Button"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Retrain Feats Button"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Remove-Effect Shortcut"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["No Dropped Bulk"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Items Merging Button"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Allow Item Split"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": ""
+        },
+        {
+          "path": ["Teleport Tokens"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "But lock it to GM-only."
+        },
+        {
+          "path": ["Condition Manager", "Enabled"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This is phenomenal. For all of the spells that apply a specific condition for a time, so you don't have to try and remember everything."
+        },
+        {
+          "path": ["Droppeth", "Enabled"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Oftentimes much better than just marking an item as 'dropped'."
+        },
+        {
+          "path": ["Roll Tracker"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "Never actually used it before, kind of curious."
+        },
+        {
+          "path": ["Target Helper", "Enabled"],
+          "from": ["false"],
+          "to": ["true"],
+          "reasoning": "This is the single best utility in all of PF2e. Not even kidding."
+        }
+      ]
+    },
+    {
+      "id": "crlngn-ui",
+      "name": "Carolingian UI [NOT USED ATM]",
+      "url": "https://foundryvtt.com/packages/crlngn-ui",
+      "category": "Agnostic Useful",
+      "tags": ["UI and QoL"],
+      "note": "This is very new to me. I will not be documenting my configs here, since there are a ton of them, and I'm still experimenting. But I do highly enjoy the sleekness.",
       "settings": []
     }
+
+
+    
+    
   ]
 }
