@@ -321,7 +321,7 @@
       "name": "PF2e Aztec's Sundered",
       "url": "https://foundryvtt.com/packages/pf2e-aztecs-sundered",
       "category": "System Useful",
-      "tags": ["Automation",],
+      "tags": ["Automation"],
       "note": "The amount of times some enemies will deal damage to players' items is far from zero. And it tends to grind the game to a halt as the GM tries to figure out how much HP or hardness something has. This helps deal with it. Unfortunately the configs are a bit buggy.",
       "settings": [
         {
