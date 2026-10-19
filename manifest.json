@@ -4,14 +4,8 @@
       "id": "pf2e",
       "label": "Pathfinder 2e",
       "versions": [
+        { "version": "1.1", "foundryVersion": "V14", "date": "10.26", "file": "data/pf2e/pf2e-v1.1.json" },
         { "version": "1.0", "foundryVersion": "V14", "date": "08.26", "file": "data/pf2e/pf2e-v1.0.json" }
-      ]
-    },
-    {
-      "id": "pf2e",
-      "label": "Pathfinder 2e",
-      "versions": [
-        { "version": "1.1", "foundryVersion": "V14", "date": "10.26", "file": "data/pf2e/pf2e-v1.1.json" }
       ]
     },
     {
